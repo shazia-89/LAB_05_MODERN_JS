@@ -2,21 +2,30 @@
 <html>
 <body>
 
-<button id=""laodFeature">Load Advanced Feature</button>
+<button id="loadFeature">Load Advanced Feature</button>
 
 <div style="height: 1000px"></div>
-<div id="lazy">waiing...</div>
-<script type="module">
-    document.getElementById("loatFeature").addEventListener("click", async () => {
-        try {
-            const module = await import("./modules/advanced_feature.mjs");
-            module.showAdvanced();
-        } catch {
-            alert("Failed to load module");
-        }
 
-    });
-    observer.observe(document.getElementById("lazy"));
+<div id="lazy">Waiting...</div>
+
+<script type="module">
+  document.getElementById("loadFeature").addEventListener("click", async () => {
+    try {
+      const module = await import("./modules/advanced_feature.mjs");
+      module.showAdvanced();
+    } catch {
+      alert("Failed to load module");
+    }
+  });
+
+  const observer = new IntersectionObserver(async (entries) => {
+    if (entries[0].isIntersecting) {
+      const module = await import("./modules/lazy_component.mjs");
+      module.loadLazy();
+    }
+  });
+
+  observer.observe(document.getElementById("lazy"));
 </script>
 
 </body>
