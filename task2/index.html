@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<button id=""laodFeature">Load Advanced Feature</button>
+
+<div style="height: 1000px"></div>
+<div id="lazy">waiing...</div>
+<script type="module">
+    document.getElementById("loatFeature").addEventListener("click", async () => {
+        try {
+            const module = await import("./modules/advanced_feature.mjs");
+            module.showAdvanced();
+        } catch {
+            alert("Failed to load module");
+        }
+
+    });
+    observer.observe(document.getElementById("lazy"));
+</script>
+
+</body>
+</html>
